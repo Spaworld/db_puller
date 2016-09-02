@@ -10,4 +10,6 @@ class Channel < RemoteDB
 
   @selected_channel_ids =ENV['SELECTED_CHANNEL_IDS'].split(',').map(&:to_i)
 
+  has_many :orders, foreign_key: ENV['ORDERS_CUSTOMER_ID']
+
 end
