@@ -1,0 +1,28 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: sales_reports_development
+
+test:
+  <<: *default
+  database: sales_reports_test
+
+production:
+  <<: *default
+  database: sales_reports_production
+  username: sales_reports
+  password: <%= ENV['SALES_REPORTS_DATABASE_PASSWORD'] %>
+
+remote_db: &remote_default
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  database: <%= ENV['DB_NAME'] %>
+  host:     <%= ENV['DB_HOST'] %>
+  timeout:  <%= ENV['DB_TIMEOUT'] %>
+  adapter:  <%= ENV['DB_ADAPTER'] %>
+  port:     <%= ENV['DB_PORT'] %>
+
