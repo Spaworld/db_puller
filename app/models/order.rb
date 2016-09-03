@@ -19,5 +19,6 @@ class Order < RemoteDB
 
   belongs_to :channel, foreign_key: ENV['ORDERS_CUSTOMER_ID']
   has_many   :order_details, foreign_key: ENV['ORDER_DETAIL_ORDER_ID']
+  has_many   :products, through: :order_details
 
 end
