@@ -11,10 +11,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
-gem 'rspec', '>=3.1'
-gem 'dotenv-rails'
-gem 'pry-rails'
-gem 'hirb'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+  gem 'dotenv-rails'
+  gem 'pry-rails'
+  gem 'hirb'
+end
 
 gem 'tiny_tds'
 gem 'activerecord-sqlserver-adapter', '~> 4.1.0'
