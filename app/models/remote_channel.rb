@@ -1,4 +1,4 @@
-class Channel < RemoteDB
+class RemoteChannel < RemoteDB
 
   self.table_name  = ENV['CHANNELS_TABLE_NAME']
   self.primary_key = ENV['CHANNELS_PRIMARY_KEY']
@@ -10,9 +10,9 @@ class Channel < RemoteDB
 
   @selected_channel_ids = ENV['SELECTED_CHANNEL_IDS'].split(',').map(&:to_i)
 
-  has_many :orders,        foreign_key: ENV['ORDERS_CUSTOMER_ID']
-  has_many :order_details, through: :orders
-  has_many :products,      through: :order_details
+  has_many :remote_orders,        foreign_key: ENV['ORDERS_CUSTOMER_ID']
+  has_many :remote_order_details, through: :remote_orders
+  has_many :remote_products,      through: :remote_order_details
 
   def nickname
     channels_names_dictionary = Hash[*(ENV['CHANNELS_NAMES_DICTIONARY'].split(','))]

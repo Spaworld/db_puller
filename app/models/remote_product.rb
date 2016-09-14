@@ -1,4 +1,4 @@
-class Product < RemoteDB
+class RemoteProduct < RemoteDB
 
   self.table_name   = ENV['PRODUCTS_TABLE_NAME']
   self.primary_key  = ENV['PRODUCTS_PRIMARY_KEY']
@@ -7,11 +7,11 @@ class Product < RemoteDB
   alias_attribute :qb_sku,  ENV['PRODUCTS_QB_SKU']
   alias_attribute :kit_id,  ENV['PRODUCTS_KIT_ID']
 
-  has_many :order_details, foreign_key: ENV['ORDER_DETAIL_PRODUCT_ID']
-  has_many :orders,        through: :order_details
-  has_many :channels,      through: :orders
+  has_many :remote_order_details, foreign_key: ENV['ORDER_DETAIL_PRODUCT_ID']
+  has_many :remote_orders,        through: :remote_order_details
+  has_many :remote_channels,      through: :remote_orders
 
-  CHANNEL_NAMES = Channel.all.map(&:nickname)
+  CHANNEL_NAMES = RemoteChannel.all.map(&:nickname)
   CHANNEL_NAMES.each do |channel_name|
     define_method("#{channel_name}_sku") do
       klass_name = ENV['TRANSLATOR_CLASS_PREFIX'] + channel_name.capitalize
