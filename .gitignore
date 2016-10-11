@@ -20,3 +20,6 @@
 
 # Ignore vim swap
 *.swp
+
+# DB Indexes?
+/index/development

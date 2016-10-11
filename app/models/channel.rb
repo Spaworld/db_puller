@@ -19,4 +19,13 @@ class Channel < RemoteDB
     channels_names_dictionary[name]
   end
 
+  def sold_vendor_skus
+    remote_orders.map do |order|
+      order.remote_products.map do |product|
+        next if product.nil?
+        product.vendor_sku(nickname)
+      end
+    end
+
+  end
 end

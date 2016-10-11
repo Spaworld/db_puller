@@ -20,11 +20,16 @@ class Product < RemoteDB
         alias_attribute :vendor_sku, ENV['TRANSLATOR_VENDOR_SKU']
         alias_attribute :native_sku, ENV['TRANSLATOR_LEGACY_SKU']
         def self.get_vendor_sku(sku)
+          return unless find_by(native_sku: sku)
           find_by(native_sku: sku).vendor_sku
         end
       }) # oh, god...
       klass.get_vendor_sku(sku)
     end
+  end
+
+  def vendor_sku(channel_nickname)
+    send("#{channel_nickname}_sku")
   end
 
 end
